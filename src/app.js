@@ -52,7 +52,36 @@ function handleSearchSubmit(event) {
     searchCity(searchInput.value);
 }
 
+function displayforcast() {
+    
+let forcastElement = document.querySelector("#forcast");
+
+let days = ["Tue","Wed","Thur","Fri","Sat"];
+let forcastHTML="";
+
+days.forEach(function(day){
+forcastHTML=forcastHTML+`
+                <div class="weather-forcast-date">${day}</div>
+                <div class="weather-forcast-image">
+                  <img
+                    src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png"
+                   width="60"
+                  />
+                </div>
+                <div class="weather-forcast-temp">
+                <span class="weather-forcast-min-temp">18</span>° <span class="weather-forcast-max-temp">30</span> °
+              </div>
+            </div>
+            </div>`;
+});
+
+forcastElement.innerHTML=forcastHTML;
+}
+
 
 let searchFormElement = document.querySelector ("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
-searchCity("Greenville")
+
+searchCity("Greenville");
+
+displayforcast();
