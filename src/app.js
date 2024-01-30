@@ -17,6 +17,8 @@ function refreshWeather(response){
     windElement.innerHTML = `${response.data.wind.speed}km/h`;
     temperatureElement.innerHTML = Math.round(temperature);
     timeElement.innerHTML = formatDate(date);
+
+    getForcast(response.data.city);
  
 }
 function formatDate(date){
@@ -43,8 +45,17 @@ function searchCity(city) {
 let apiKey = "foa37dd45976t896b4240bb8863b3e41";
 let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 axios.get(apiUrl).then(refreshWeather);
+console.log(apiUrl);
 }
 
+function getForcast(city) {
+  
+let apiKey = "foa37dd45976t896b4240bb8863b3e41";
+let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`
+;
+console.log (apiUrl);
+axios.get(apiUrl).then(displayforcast);
+}
 function handleSearchSubmit(event) {
     event.preventDefault();
     let searchInput = document.querySelector("#search-form-input");
@@ -52,7 +63,8 @@ function handleSearchSubmit(event) {
     searchCity(searchInput.value);
 }
 
-function displayforcast() {
+function displayforcast(response) {
+    console.log(response.data);
     
 let forcastElement = document.querySelector("#forcast");
 
@@ -85,4 +97,3 @@ searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Greenville");
 
-displayforcast();
