@@ -62,30 +62,39 @@ function handleSearchSubmit(event) {
   
     searchCity(searchInput.value);
 }
+function formatDay(timestamp){
+   let date= new Date( timestamp * 1000);    
+    let days = ["Sun","Mon","Tues","Wed","Thur","Fri","Sat",];
+
+    return days[date.getDay()];
+}
 
 function displayforcast(response) {
     console.log(response.data);
     
 let forcastElement = document.querySelector("#forcast");
 
-let days = ["Tue","Wed","Thur","Fri","Sat"];
+
 let forcastHTML="";
 
-days.forEach(function(day){
-forcastHTML=forcastHTML+`
+response.data.daily.forEach(function(day,index){
+if (index<5){
+    forcastHTML=forcastHTML+`
                 <div class="weather-forecast-day">
-                <div class="weather-forcast-date">${day}</div>
+                <div class="weather-forcast-date">${formatDay(day.time)}</div>
              
                   <img
-                    src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png"
+                    src="${day.condition.icon_url}"
                     class="weather-forcast-image"               />
                
                 <div class="weather-forecast-temps">  
                 <div class="weather-forcast-temp">
-                <div class="weather-forcast-min-temp">18°</div> <div class="weather-forcast-max-temp">30°</div> 
+                <div class="weather-forcast-min-temp">${Math.round(day.temperature.minimum)}°</div> <div class="weather-forcast-max-temp">${Math.round(day.temperature.maximum)}°</div> 
               </div>
             </div>
-            </div>`;
+            </div>
+            `;
+            }
 });
 
 forcastElement.innerHTML=forcastHTML;
