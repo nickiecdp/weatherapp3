@@ -61,15 +61,16 @@ let forcastHTML="";
 
 days.forEach(function(day){
 forcastHTML=forcastHTML+`
+                <div class="weather-forecast-day">
                 <div class="weather-forcast-date">${day}</div>
-                <div class="weather-forcast-image">
+             
                   <img
                     src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png"
-                   width="60"
-                  />
-                </div>
+                    class="weather-forcast-image"               />
+               
+                <div class="weather-forecast-temps">  
                 <div class="weather-forcast-temp">
-                <span class="weather-forcast-min-temp">18</span>° <span class="weather-forcast-max-temp">30</span> °
+                <div class="weather-forcast-min-temp">18°</div> <div class="weather-forcast-max-temp">30°</div> 
               </div>
             </div>
             </div>`;
